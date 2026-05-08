@@ -1,0 +1,13 @@
+model Device {
+  id          String    @id @default(uuid()) @db.Uuid
+  serial      String    @unique @map("serial")
+  name        String    @map("name")
+  description String?   @map("description")
+  status      String    @default("waiting") @map("status")
+  metadata    Json      @default("{}") @map("metadata")
+  createdAt   DateTime  @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt   DateTime  @default(now()) @updatedAt @map("updated_at") @db.Timestamptz(6)
+  deletedAt   DateTime? @map("deleted_at") @db.Timestamptz(6)
+
+  @@schema("marshal")
+}
